@@ -2,7 +2,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var foodController = require('./controllers/food')
+var foodController = require('./controllers/food');
+var userController = require('./controllers/user')
 
 mongoose.connect('mongodb://localhost:27017/RESTful-Fridge');
 
@@ -28,6 +29,10 @@ router.route('/foods/:food_id')
   .get(foodController.getFoodItem)
   .put(foodController.putFoodItem)
   .delete(foodController.deleteFoodItem)
+
+router.route('/users')
+  .post(userController.postUsers)
+  .get(userController.getUsers)
 
 // Register all our routes with /api
 app.use('/api', router);

@@ -78,10 +78,20 @@ foodRoute.put(function(req,res) {
               res.send(err);
 
             res.json(food)
-        })
+        });
+    });
+});
+
+//DELETE food when quantity is 0
+
+foodRoute.delete(function(req,res) {
+    Food.findByIdAndRemove(req.params.food_id, function(err, food) {
+        if(err)
+          res.send(err);
+
+        res.json({message: 'Food removed from fridge'});
     })
 })
-
 
 // Register all our routes with /api
 app.use('/api', router);

@@ -3,7 +3,9 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var foodController = require('./controllers/food');
-var userController = require('./controllers/user')
+var userController = require('./controllers/user');
+var passport = require('passport');
+var authController = require('./controllers/auth');
 
 mongoose.connect('mongodb://localhost:27017/RESTful-Fridge');
 

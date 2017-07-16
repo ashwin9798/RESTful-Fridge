@@ -53,6 +53,7 @@ foodsRoute.get(function(req, res) {
 //single item
 var foodRoute = router.route('/foods/:food_id');
 
+//Get a single item from the fridge by its ID
 foodRoute.get(function(req, res) {
   // Use the Beer model to find a specific beer
   Food.findById(req.params.food_id, function(err, food) {
@@ -62,6 +63,25 @@ foodRoute.get(function(req, res) {
     res.json(food);
   });
 });
+
+//PUT method to decrease the quantity of an item when it is removed
+
+foodRoute.put(function(req,res) {
+    Food.findById(req.params.food_id, function(err, food) {
+        if(err)
+          res.send(err);
+
+        food.quantity = req.body.quantity;
+
+        beer.save(function(err) {
+            if(err)
+              res.send(err);
+
+            res.json(food)
+        })
+    })
+})
+
 
 // Register all our routes with /api
 app.use('/api', router);
